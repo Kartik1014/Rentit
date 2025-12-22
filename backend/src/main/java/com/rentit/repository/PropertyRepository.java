@@ -22,6 +22,10 @@ public interface PropertyRepository extends JpaRepository<Property, Long>, JpaSp
     
     Optional<Property> findByIdAndDeletedAtIsNull(Long id);
     
+    Long countByDeletedAtIsNull();
+    
+    Long countByAvailabilityStatusAndDeletedAtIsNull(Property.AvailabilityStatus status);
+    
     @Query("SELECT p FROM Property p WHERE p.deletedAt IS NULL " +
            "AND (:city IS NULL OR LOWER(p.city) LIKE LOWER(CONCAT('%', :city, '%'))) " +
            "AND (:minPrice IS NULL OR p.rentAmount >= :minPrice) " +
